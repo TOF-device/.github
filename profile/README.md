@@ -1,4 +1,4 @@
-# **TOF-KSA — Advanced People Counting & Analytics System**
+# **TOF-KSA — Advanced People Counting & Analytics System (AlMajed4Oud)**
 
 TOF-KSA is a full-stack, real-time people counting and footfall analytics platform powered by high-accuracy **Time-of-Flight (TOF)** sensors. It enables organizations to monitor entries, exits, and live occupancy, visualize footfall trends, generate reports, and manage connected TOF devices efficiently.
 
@@ -326,3 +326,4 @@ Follow conventional commits and PR templates if contributing.
 ## 📜 **License**
 
 This project is licensed under the **MIT License**.
+
