@@ -306,18 +306,9 @@ AWS_S3_BUCKET=
 
 ---
 
-## 📊 **Dashboard Previews** *(Optional — add screenshots)*
-
-You can include images like:
-
-```
-![Dashboard](./public/dashboard-preview.png)
-```
-
----
-
 ## 📜 **License**
 
 This project is licensed under the **MIT License**.
+
 
 
