@@ -316,14 +316,8 @@ You can include images like:
 
 ---
 
-## 🤝 **Contributing**
-
-Contributions, issues, and feature requests are welcome.
-Follow conventional commits and PR templates if contributing.
-
----
-
 ## 📜 **License**
 
 This project is licensed under the **MIT License**.
+
 
