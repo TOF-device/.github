@@ -1,42 +1,102 @@
-# TOF Device Management System — Frontend (AlMajed4Oud)
+# **TOF-KSA — Advanced People Counting & Analytics System**
 
-A modern, scalable dashboard application built for **AlMajed4Oud**, a leading Saudi Arabian company.  
-This project is designed to manage, monitor, and control **TOF devices** used across multiple global branches, providing real-time analytics, user role management, and operational insights — all from a unified web interface.
+TOF-KSA is a full-stack, real-time people counting and footfall analytics platform powered by high-accuracy **Time-of-Flight (TOF)** sensors. It enables organizations to monitor entries, exits, and live occupancy, visualize footfall trends, generate reports, and manage connected TOF devices efficiently.
 
----
+The system is composed of:
 
-## Overview
-
-The TOF Device Management System enables administrators and managers to oversee thousands of devices deployed worldwide.  
-It provides a seamless experience for real-time device tracking, user role management, and detailed reporting, ensuring efficient monitoring and decision-making across distributed networks.
+* **Next.js Client** — modern dashboards, reports, and device management UI
+* **Spring Boot Server** — device communication, heartbeat processing, and data analytics backend
 
 ---
 
-## Key Features
+## 📖 **Project Overview**
 
-- **Real-Time Device Monitoring**: Track and visualize live device activity and status across branches worldwide.
-- **Branch & Role Management**: Create, update, and assign roles for staff, managers, and administrators within the system.
-- **Comprehensive Reports**: Generate time-based reports and export them in Excel or PDF formats for operational insights.
-- **User & Access Control**: Manage user accounts and permissions with secure authentication and role-based access.
-- **Interactive Dashboard**: Visualize metrics through dynamic charts and tables with responsive, user-friendly UI.
-- **Data Synchronization**: Real-time API integration ensures accurate and consistent device data updates across the system.
+TOF-KSA provides a complete solution for:
 
----
+* Real-time people counting
+* Crowd flow analytics
+* Device health monitoring
+* Organization-level data management
+* Secure access control
 
-## Tech Stack
-
-- **Next.js (App Router)** — Core framework for rendering and routing
-- **TypeScript** — Strong typing for scalable and maintainable code
-- **React Hook Form + Zod** — Form management and schema-based validation
-- **Tailwind CSS** — Utility-first responsive design system
-- **Chart.js** — Data visualization for real-time analytics
-- **Axios** — API data fetching and integration
-- **Lucide React** — Icon system for modern UI components
-- **SweetAlert2** — Elegant modals and alerts for user notifications
+Designed for malls, enterprises, retail spaces, universities, and public facilities looking to optimize visitor insights and operational decisions.
 
 ---
 
-## Architecture & Folder Structure
+## 🚀 **Key Features**
+
+### **📊 Real-Time Analytics Dashboard**
+
+* Live footfall monitoring with instant updates
+* Current occupancy, total entries, and exits
+* Interactive charts (Recharts) for data visualization
+
+### **📈 Comprehensive Reporting**
+
+* Historical trend analysis (hourly, daily, monthly)
+* Aggregated data for business insights (e.g., peak hours, conversion rates)
+* Date range filtering and detailed breakdowns
+
+### **📡 Device Management**
+
+* Live Heartbeat monitoring for all TOF devices
+* Remote device configuration (business hours, upload intervals, settings)
+* Secure HTTP-based communication (`/HeartBeat`, `/DataUpload`)
+
+### **🛡️ Security & Access Control**
+
+* JWT authentication (Spring Security)
+* Role-based access: **Admin**, **Developer**, **Organization**, **Viewer**
+* Strict data visibility per organization
+
+---
+
+## 🛠️ **Technology Stack**
+
+### **Frontend (Client) — Next.js**
+
+* **Framework:** Next.js 15 (React 19 + App Router)
+* **Styling:** Tailwind CSS, `tailwindcss-animate`
+* **UI:** Radix UI, Shadcn UI
+* **Icons:** Lucide React
+* **Charts:** Recharts
+* **Forms/Validation:** react-hook-form, zod
+* **Date Utilities:** date-fns
+
+### **Backend (Server) — Spring Boot**
+
+* **Framework:** Spring Boot 3.4 (Java 21)
+* **Database:** MySQL (JPA/Hibernate)
+* **Auth:** JWT (jjwt)
+* **Cloud Storage:** AWS S3
+* **Utilities:** Lombok, FastJSON
+
+---
+
+## 🏗️ **System Architecture**
+
+### **1. Data Collection**
+
+TOF devices send:
+
+* **Heartbeat** payloads → device status
+* **DataUpload** payloads → entries/exits & time-stamped movement events
+
+### **2. Processing Layer (Server)**
+
+* Validates device payloads
+* Updates population counters
+* Stores historical data in MySQL
+* Manages device active/inactive states
+
+### **3. Visualization Layer (Client)**
+
+* Fetches live and historical data via secure REST APIs
+* Displays dashboards, reports, device details, and user management pages
+
+---
+
+## 📂 **Frontend Architecture & Folder Structure**
 
 ```
 src/
@@ -52,6 +112,7 @@ src/
     globals.css
     layout.tsx
     page.tsx
+
   components/
     auth/
       LoginView.tsx
@@ -120,14 +181,17 @@ src/
       toast.tsx
       toaster.tsx
       tooltip.tsx
+
   constants/
     chartConfigs.ts
     testData.ts
+
   contexts/
     devices-and-users-context.tsx
     live-data-context.tsx
     reports-data-context.tsx
     theme-provider.tsx
+
   hooks/
     use-mobile.tsx
     use-toast.ts
@@ -137,6 +201,7 @@ src/
     useReportsChartsBoxes.ts
     useReportsData.ts
     useViewerForm.ts
+
   lib/
     validations/
       CreateDeviceFormSchema.ts
@@ -144,6 +209,7 @@ src/
       OwnerFormSchema.ts
       ViewerFormSchema.ts
     utils.ts
+
   types/
     detectionEntry.ts
     formMethods.ts
@@ -153,6 +219,7 @@ src/
     reduceTotalDataProps.ts
     reportsData.ts
     RequestName.ts
+
   utils/
     fetchDataForDate.ts
     fetchLiveData.ts
@@ -171,104 +238,91 @@ src/
     onOwnerFormSubmit.ts
     onViewerFormSubmit.ts
     reduceTotal.ts
+
   middleware.ts
-.gitignore
-.prettierrc
-components.json
-eslint.config.mjs
-next.config.ts
-package.json
-postcss.config.mjs
-README.md
-tailwind.config.ts
+
+.gitignore  
+.prettierrc  
+components.json  
+eslint.config.mjs  
+next.config.ts  
+package.json  
+postcss.config.mjs  
+README.md  
+tailwind.config.ts  
 tsconfig.json
 ```
 
-The architecture follows a **modular component-based structure** to promote scalability, reusability, and clean separation of concerns.
-
 ---
 
-## Core Functionalities
+## 📦 **Installation & Setup**
 
-- **Dashboard Overview** — Displays device counts, online/offline status, and activity summaries.
-- **Device Management** — Allows managers to add, edit, or remove devices and assign them to specific branches.
-- **Branch Management** — Supports global multi-branch structures for international operations.
-- **Reporting System** — Enables export of analytics data as Excel or PDF for internal audits.
-- **Role-Based Access Control (RBAC)** — Ensures data visibility and permissions are restricted by user role.
-
----
-
-## Environment Variables
-
-To configure your environment, create a `.env` file in the root directory with the following:
-
-NEXT_PUBLIC_API_BASE_URL=<Your Backend API URL>
-
-Add additional variables as required for production deployments.
-
----
-
-## Getting Started
-
-**Prerequisites**
-
-- Node.js (LTS recommended)
-- npm or yarn package manager
-
-**Setup Instructions**
+### **1. Clone the Repository**
 
 ```bash
-# clone the repository
-git clone <repo-url>
-cd tof-device-management-frontend
+git clone https://github.com/your-org/tof-ksa.git
+cd tof-ksa
+```
 
-# install dependencies
+### **2. Install Client Dependencies**
+
+```bash
+cd client
 npm install
-# or
-yarn
-
-# configure environment
-cp .env.example .env
-# update NEXT_PUBLIC_API_BASE_URL with backend endpoint
-
-# run in development mode
 npm run dev
+```
 
-# build for production
-npm run build
-npm run start
+### **3. Install Server Dependencies**
 
+```bash
+cd server
+mvn clean install
+mvn spring-boot:run
+```
 
+> Make sure MySQL is running and environment variables are configured.
 
-Deployment
+---
 
-This app can be deployed to Vercel, Netlify, or any platform supporting Next.js.
-Ensure NEXT_PUBLIC_API_BASE_URL points to the production backend server before deployment.
+## 🔐 **Environment Variables**
 
-Contribution
-
-Contributions are welcome! Please follow the steps below:
-
-Fork the repository.
-
-Create a new branch: git checkout -b feat/your-feature.
-
-Commit and push your changes.
-
-Open a pull request with a clear description of your modifications.
-
-Please follow the existing code style (TypeScript + Tailwind + modular structure).
-
-Security
-
-Sensitive data such as tokens and API keys must not be committed.
-
-Follow secure coding and data handling practices.
-
-Use HTTPS for all API communications.
-
-Maintainer
-
-For inquiries, issues, or contributions, please open an issue on the repository or contact the maintainer directly.
+### **Client**
 
 ```
+NEXT_PUBLIC_API_URL=
+```
+
+### **Server**
+
+```
+DB_URL=
+DB_USERNAME=
+DB_PASSWORD=
+JWT_SECRET=
+AWS_ACCESS_KEY=
+AWS_SECRET_KEY=
+AWS_S3_BUCKET=
+```
+
+---
+
+## 📊 **Dashboard Previews** *(Optional — add screenshots)*
+
+You can include images like:
+
+```
+![Dashboard](./public/dashboard-preview.png)
+```
+
+---
+
+## 🤝 **Contributing**
+
+Contributions, issues, and feature requests are welcome.
+Follow conventional commits and PR templates if contributing.
+
+---
+
+## 📜 **License**
+
+This project is licensed under the **MIT License**.
